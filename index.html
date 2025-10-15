@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Video Editor Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header id="main-header">
+        <nav>
+            <ul>
+                <!-- These links now point to sections on this page -->
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#cv">CV</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ========= HOME / HERO SECTION ========= -->
+    <section id="home">
+        <div class="hero-content">
+            <h1>Your Name</h1>
+            <p>Video Editor | Content Creator</p>
+        </div>
+        <a href="#about" class="scroll-down-link">
+            <div class="scroll-down-icon"></div>
+        </a>
+    </section>
+
+    <!-- The rest of the page content will go inside this main tag -->
+    <main>
+        <!-- ========= ABOUT ME SECTION ========= -->
+        <section id="about" class="page-section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-me-container animate-on-scroll">
+                    <div class="about-me-photo">
+                        <!-- Remember to replace this with your photo -->
+                        <img src="your-photo.jpg" alt="A professional photo of yourself">
+                    </div>
+                    <div class="about-me-text">
+                        <h3>Hello! I'm [Your Name].</h3>
+                        <p>
+                            This is the space for your personal story. Talk about what inspired you to become a video editor, your creative process, and what you are passionate about. You can discuss your journey, your philosophy on storytelling, and what makes your work unique.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========= PORTFOLIO SECTION ========= -->
+        <section id="portfolio" class="page-section">
+            <div class="container">
+                <h2>My Work & Skills</h2>
+                <div class="animate-on-scroll">
+                    <h3>Video Projects</h3>
+                    <div class="video-gallery">
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-container">
+                             <iframe src="https://www.youtube.com/embed/VIDEO_ID_3" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <h3>My Skills</h3>
+                    <ul class="skills-list">
+                        <li>Video Editing (Adobe Premiere Pro, Final Cut Pro)</li>
+                        <li>Color Correction and Grading</li>
+                        <li>Motion Graphics (Adobe After Effects)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========= CV / RESUME SECTION ========= -->
+        <section id="cv" class="page-section">
+            <div class="container">
+                <h2>Resume</h2>
+                <div class="cv-timeline animate-on-scroll">
+                    <!-- Work Experience Item -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Video Editor | Company Name</h3>
+                            <span class="timeline-date">2022 - Present</span>
+                            <p>Describe your responsibilities and achievements here.</p>
+                        </div>
+                    </div>
+                    <!-- Education Item -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Degree Name | University Name</h3>
+                             <span class="timeline-date">2016 - 2020</span>
+                            <p>Mention relevant coursework or academic achievements.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========= CONTACT SECTION ========= -->
+        <section id="contact" class="page-section">
+             <div class="container">
+                <h2>Get In Touch</h2>
+                <p class="contact-intro animate-on-scroll">Have a project in mind? I'd love to hear from you. Fill out the form below to get started.</p>
+                <form class="contact-form animate-on-scroll">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+             </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 by Your Name</p>
+    </footer>
+
+    <!-- JavaScript for animations and nav highlighting -->
+    <!-- (Your footer code is right above this) -->
+
+    <!-- JavaScript for animations and nav highlighting -->
+    <script>
+        // JS for scroll animations (This part is unchanged)
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        animatedElements.forEach(el => observer.observe(el));
+
+
+        // JS for active navigation link highlighting (CORRECTED VERSION)
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('header nav a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // THIS IS THE FIX: Check if the user is at the bottom of the page.
+            // If the bottom is reached, force the last section ('contact') to be 'current'.
+            if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
+                current = 'contact';
+            }
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').substring(1) === current) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
